@@ -10,7 +10,7 @@ class TasksController < ApplicationController
 
     if session
       @tasks = session.user.tasks
-      render 'tasks/index' # can be omitted
+      render 'tasks/index', status: :unprocessable_entity
     else
       render json: { tasks: [] }
     end
