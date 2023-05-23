@@ -1,9 +1,11 @@
 class SessionsController < ApplicationController
+  
   def create
     @user = User.find_by(username: params[:user][:username])
     if @user and @user.password == params[:user][:password]
       session = @user.sessions.create
-      #byebug
+  
+      byebug
       cookies.permanent.signed[:todolist_session_token] = {
         value: session.token,
         httponly: true
@@ -43,5 +45,10 @@ class SessionsController < ApplicationController
       }
     end
   end
+
+  private
+    def session_params
+      params.require(:session).permit(:id,:user_id, :token)
+    end
 
 end

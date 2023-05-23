@@ -1,5 +1,4 @@
 class Session < ApplicationRecord
-    belongs_to :UsersController
     belongs_to :user
     before_validation :generate_session_token
 
